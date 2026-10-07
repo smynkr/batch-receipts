@@ -3,6 +3,9 @@ from __future__ import annotations
 import contextlib
 import io
 import json
+import os
+import subprocess
+import sys
 import tempfile
 import unittest
 from pathlib import Path
@@ -437,6 +440,31 @@ class FileAndCliTests(unittest.TestCase):
                 self.assertEqual(code, 2)
                 self.assertFalse(report["accepted"])
                 self.assertEqual(report["violations"][0]["code"], "io.read")
+
+    def test_cli_emits_machine_readable_json_for_surrogateescaped_path(self):
+        if os.name != "posix":
+            self.skipTest("POSIX filesystem paths can contain arbitrary bytes")
+
+        path = os.fsdecode(b"missing-\xff.json")
+        repository = Path(__file__).resolve().parents[1]
+        environment = os.environ.copy()
+        environment["PYTHONPATH"] = os.pathsep.join(
+            value for value in (str(repository / "src"), environment.get("PYTHONPATH")) if value
+        )
+        result = subprocess.run(
+            [sys.executable, "-m", "batch_receipts", "check", path],
+            cwd=repository,
+            env=environment,
+            capture_output=True,
+            check=False,
+        )
+
+        self.assertEqual(result.returncode, 2, result.stderr.decode("utf-8", errors="replace"))
+        self.assertNotIn(b"Traceback", result.stderr)
+        report = json.loads(result.stdout.decode("utf-8"))
+        self.assertFalse(report["valid"])
+        self.assertEqual(report["violations"][0]["code"], "io.read")
+        self.assertEqual(report["violations"][0]["path"], path)
 
     def test_cli_usage_errors_are_machine_readable_and_have_exit_two(self):
         stdout = io.StringIO()

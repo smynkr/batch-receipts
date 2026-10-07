@@ -37,7 +37,7 @@ def _nonnegative_integer(value: str) -> int:
 
 
 def _write_report(report: CheckReport) -> None:
-    json.dump(report.to_dict(), sys.stdout, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+    json.dump(report.to_dict(), sys.stdout, ensure_ascii=True, sort_keys=True, separators=(",", ":"))
     sys.stdout.write("\n")
 
 
