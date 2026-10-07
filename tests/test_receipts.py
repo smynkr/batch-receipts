@@ -124,7 +124,7 @@ class StructureTests(unittest.TestCase):
         for changes, expected_code in (
             ({"format": "batch-receipts/v999"}, "format.unsupported"),
             ({"profile": "fanout/v1"}, "profile.unsupported"),
-            ({"secret": "outside extensions"}, "field.unknown"),
+            ({"unknown_field": "outside extensions"}, "field.unknown"),
         ):
             with self.subTest(expected_code=expected_code):
                 self.assertIn(expected_code, codes(check_receipt(receipt(**changes))))
