@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.1 — 2026-10-07
+
+- Escape surrogate-encoded filesystem paths in CLI JSON reports so unreadable paths remain valid machine-readable output.
+
 ## 0.1.0 — 2026-10-07
 
 - Add stdlib-only validation for `batch-receipts/v1` and `record-preserving/same-unit/v1` receipts, including strict JSON limits and all three record-conservation equations.
