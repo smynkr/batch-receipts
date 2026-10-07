@@ -1,0 +1,21 @@
+{
+  "format": "batch-receipts/v1",
+  "profile": "record-preserving/same-unit/v1",
+  "job": "synthetic-import",
+  "run": "synthetic-run-failed",
+  "unit": "order-record",
+  "outcome": "failed",
+  "reason": "destination write failed",
+  "counts": {
+    "fetched": 1,
+    "parsed": 1,
+    "rejected": 0,
+    "attempted": 1,
+    "inserted": 0,
+    "updated": 0,
+    "unchanged": 0,
+    "skipped": 0,
+    "dead_lettered": 0,
+    "failed": 1
+  }
+}

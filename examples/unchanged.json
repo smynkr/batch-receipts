@@ -1,0 +1,24 @@
+{
+  "format": "batch-receipts/v1",
+  "profile": "record-preserving/same-unit/v1",
+  "job": "synthetic-import",
+  "run": "synthetic-run-unchanged",
+  "unit": "order-record",
+  "outcome": "no_change",
+  "counts": {
+    "fetched": 1,
+    "parsed": 1,
+    "rejected": 0,
+    "attempted": 1,
+    "inserted": 0,
+    "updated": 0,
+    "unchanged": 1,
+    "skipped": 0,
+    "dead_lettered": 0,
+    "failed": 0
+  },
+  "no_change_check": {
+    "method": "compare the producer's records with the destination before writing",
+    "checked_at": "2026-10-07T12:00:00Z"
+  }
+}
