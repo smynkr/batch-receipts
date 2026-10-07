@@ -1,0 +1,20 @@
+{
+  "format": "batch-receipts/v1",
+  "profile": "record-preserving/same-unit/v1",
+  "job": "synthetic-import",
+  "run": "synthetic-run-accepted",
+  "unit": "order-record",
+  "outcome": "success",
+  "counts": {
+    "fetched": 3,
+    "parsed": 3,
+    "rejected": 0,
+    "attempted": 3,
+    "inserted": 1,
+    "updated": 1,
+    "unchanged": 1,
+    "skipped": 0,
+    "dead_lettered": 0,
+    "failed": 0
+  }
+}
